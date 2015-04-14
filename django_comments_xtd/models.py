@@ -62,7 +62,7 @@ class XtdComment(Comment):
                 self.thread_id = self.id
             else:
                 if max_thread_level_for_content_type(self.content_type):
-                    with transaction.commit_on_success():
+                    with transaction.atomic():
                         self._calculate_thread_data()
                 else:
                     raise MaxThreadLevelExceededException(self.content_type)
